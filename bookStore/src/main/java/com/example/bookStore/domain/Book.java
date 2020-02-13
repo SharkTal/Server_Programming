@@ -1,10 +1,12 @@
 package com.example.bookStore.domain;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book {
@@ -12,17 +14,26 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;	
 	private String author, title, isbn, year;
+	
+	@ManyToOne
+	@JoinColumn(name = "categoryid")
+	private Category category;
 
 	public Book() {
 	}
 
-	public Book(String author, String title, String isbn, String year) {
+	
+
+	public Book(String author, String title, String isbn, String year, Category category) {
 		super();
 		this.author = author;
 		this.title = title;
 		this.isbn = isbn;
 		this.year = year;
+		this.category = category;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -63,5 +74,15 @@ public class Book {
 	public void setYear(String year) {
 		this.year = year;
 	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
+	
 
 }

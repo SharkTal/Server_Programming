@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Bean;
 
 import com.example.bookStore.domain.Book;
 import com.example.bookStore.domain.BookRepository;
+import com.example.bookStore.domain.Category;
+import com.example.bookStore.domain.CategoryRepository;
+import com.sun.tools.sjavac.Log;
 
 @SpringBootApplication
 public class BookStoreApplication {
@@ -16,15 +19,16 @@ public class BookStoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner booklist(BookRepository repository) {
+	public CommandLineRunner booklist(BookRepository brepository, CategoryRepository crepository) {
 		return (args) -> {
-			Book b1 = new Book("Chen James", "CoronaVirus Research", "12122019", "2020");
-			Book b2 = new Book("Li Hong", "5G War", "12112019", "2021");
-			Book b3 = new Book("Koskinen Mika", "Finland Equality", "11122019", "2022");
 
-			repository.save(b1);
-			repository.save(b2);
-			repository.save(b3);
+			crepository.save(new Category("IT"));
+			crepository.save(new Category("Biology"));
+			crepository.save(new Category("Business"));
+			
+			brepository.save(new Book("Simon", "JAVA","01012020","2020", crepository.findByName("IT").get(0)));
+			brepository.save(new Book("Lee", "Python","01012020","2020", crepository.findByName("Business").get(0)));
+		
 		};
 	}
 
