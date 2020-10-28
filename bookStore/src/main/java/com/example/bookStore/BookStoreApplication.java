@@ -9,7 +9,7 @@ import com.example.bookStore.domain.Book;
 import com.example.bookStore.domain.BookRepository;
 import com.example.bookStore.domain.Category;
 import com.example.bookStore.domain.CategoryRepository;
-import com.sun.tools.sjavac.Log;
+
 
 @SpringBootApplication
 public class BookStoreApplication {

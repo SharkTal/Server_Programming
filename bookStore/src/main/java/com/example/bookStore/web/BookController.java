@@ -50,18 +50,23 @@ public class BookController {
 		brepository.save(book);
 		return "redirect:booklist";
 	}
-	
+
+
+	@RequestMapping(value= "/edit/{id}", method = RequestMethod.GET)
+	public String editBook(@PathVariable("id") Long bookId, Model model) {
+		model.addAttribute("book", brepository.findById(bookId));
+		model.addAttribute("categories", crepository.findAll());
+		return "editbook";
+	}
+
+
+
 	@RequestMapping(value= "/delete/{id}",method = RequestMethod.GET)
 	public String deleteBook(@PathVariable("id") Long bookId, Model model ) {
 		brepository.deleteById(bookId);
 		return "redirect:../booklist";
 	} 
 	
-	
-	@RequestMapping(value= "/edit/{id}", method = RequestMethod.GET)
-	public String editBook(@PathVariable("id") Long bookId, Model model) {
-		model.addAttribute("book", brepository.findById(bookId));
-		return "editbook";
-	}
+
 	
 }
